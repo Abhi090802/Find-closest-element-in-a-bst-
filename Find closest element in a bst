@@ -1,0 +1,50 @@
+Iterative approach 
+/* TC=O(LOG2(H)) SC=O(LOG2(H)) 
+    int minDiff(Node *root, int K)
+    {
+       int ans=INT_MAX;
+       while(root)
+       {
+           if(root->data==K) 
+           return 0; 
+           else if(root->data<K)
+            {
+                ans=min(ans,abs(root->data-K)); 
+                root=root->right; 
+            }
+            else if(root->data>K)
+            { 
+                ans=min(ans,abs(root->data-K));
+                root=root->left; 
+            }
+       }
+       return ans==INT_MAX?-1:ans;
+    }
+*/
+Recursive approach 
+/*TC=O(LOG2(H)) SC=O(LOG2(H))
+
+void helper(Node*&root,int key,int &ans)
+    {
+        if(!root) return; 
+        if(!key) return ;
+        if(root->data==key) 
+        ans=0;
+        if(root->data<key)
+        {
+            ans=min(ans,abs(root->data-key)); 
+            helper(root->right,key,ans); 
+        }
+        else if(root->data>key)
+        {
+            ans=min(ans,abs(root->data-key)); 
+            helper(root->left,key,ans);
+        }
+        
+    }
+    int minDiff(Node *root, int K)
+    { int ans=INT_MAX; 
+        helper(root,K,ans);
+        return ans==INT_MAX?-1:ans;
+    }
+*/
